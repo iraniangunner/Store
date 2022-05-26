@@ -73,7 +73,7 @@ const SignIn = () => {
             id="password"
             onChange={clickHandler}
             name="passWord"
-            className="block w-full bg-white px-[12px] py-[5px] border border-solid border-[#d0d7de] focus:outline-none focus:border-[#0969da] focus:shadow-inner-[0_0_0_32px_#ffffff] focus:shadow-[0_0_0_3px_rgba(9,105,218,0.3)] rounded-lg"
+            className="block w-full bg-white px-[12px] py-[5px] text-[#24292f] text-[14px] border border-solid border-[#d0d7de] focus:outline-none focus:border-[#0969da] focus:shadow-inner-[0_0_0_32px_#ffffff] focus:shadow-[0_0_0_3px_rgba(9,105,218,0.3)] rounded-lg"
           />
         </div>
 

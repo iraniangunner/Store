@@ -42,10 +42,10 @@ const Header = () => {
           </Link>
         </div>
         <div className="links sm:hidden lg:flex justify-end ml-auto ">
-          <ul className="hidden lg:flex justify-between items-center transition-all ease-linear duration-200 ">
+          <ul className="hidden lg:flex justify-between items-center transition-all ease-linear duration-200">
             <li className="flex justify-center items-center mx-2">
               <a
-                className="px-2 py-6 text-gray-900 dark:text-gray-50"
+                className="relative px-2 py-6 text-gray-900 dark:text-gray-50 after:absolute after:bottom-[10px] after:inset-x-0 after:m-auto after:w-0 after:content-['.'] after:text-transparent after:bg-[#aaa] after:h-[1px] after:transition[width] after:duration-[0.5s] hover:text-[#555] hover:after:w-full"
                 href="https://bscscan.com/token/0x80e7dc4e726E052b0dB04ec8b506596458809c11"
                 target="_blank"
               >
@@ -54,7 +54,7 @@ const Header = () => {
             </li>
             <li className="flex justify-center items-center mx-2">
               <a
-                className="px-2 py-6 text-gray-900 dark:text-gray-50"
+                className="relative px-2 py-6 text-gray-900 dark:text-gray-50 after:absolute after:bottom-[10px] after:inset-x-0 after:m-auto after:w-0 after:content-['.'] after:text-transparent after:bg-[#aaa] after:h-[1px] after:transition[width] after:duration-[0.5s] hover:text-[#555] hover:after:w-full"
                 href="https://bscscan.com/token/0x80e7dc4e726E052b0dB04ec8b506596458809c11"
                 target="_blank"
               >
@@ -63,7 +63,7 @@ const Header = () => {
             </li>
             <li className="flex justify-center items-center mx-2">
               <a
-                className="px-2 py-6 text-gray-900 dark:text-gray-50"
+                className="relative px-2 py-6 text-gray-900 dark:text-gray-50 after:absolute after:bottom-[10px] after:inset-x-0 after:m-auto after:w-0 after:content-['.'] after:text-transparent after:bg-[#aaa] after:h-[1px] after:transition[width] after:duration-[0.5s] hover:text-[#555] hover:after:w-full"
                 href="https://bscscan.com/token/0x80e7dc4e726E052b0dB04ec8b506596458809c11"
                 target="_blank"
               >
