@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
-
-// import { FileUploader } from "react-drag-drop-files";
-// import ImageUploading from "react-images-uploading";
+import { useDispatch, useSelector } from "react-redux";
+import { setDesc, setPrice, setTitle, setUrl, title } from "../state/formSlice";
 
 const CreateProduct = () => {
+
+  const dispatch = useDispatch();
+  const userTitle = useSelector(title)
+  
   const [formValues, setFormvalues] = useState({
     productTitle: "",
     productDesc: "",
+    productPrice : "",
     files: [],
   });
 
@@ -19,7 +23,11 @@ const CreateProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    dispatch(setUrl(formValues.files.preview))
+    dispatch(setTitle(formValues.productTitle))
+    dispatch(setDesc(formValues.productDesc))
+    dispatch(setPrice(formValues.price))
+    console.log(formValues.productTitle);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -98,13 +106,29 @@ const CreateProduct = () => {
           htmlFor="title"
           className="block text-[14px] mb-[8px] font-[400] dark:text-white"
         >
-          Product Title
+          Product Title : {userTitle}
         </label>
         <input
           type="text"
           id="title"
           onChange={clickHandler}
           name="productTitle"
+          placeholder="Enter product title"
+          className="block w-full bg-white px-[12px] py-[8px] text-[#24292f] text-[14px] border border-solid focus:outline-none rounded-lg"
+        />
+      </div>
+      <div className="mb-[30px]">
+        <label
+          htmlFor="title"
+          className="block text-[14px] mb-[8px] font-[400] dark:text-white"
+        >
+          Product Price
+        </label>
+        <input
+          type="text"
+          id="title"
+          onChange={clickHandler}
+          name="productPrice"
           placeholder="Enter product title"
           className="block w-full bg-white px-[12px] py-[8px] text-[#24292f] text-[14px] border border-solid focus:outline-none rounded-lg"
         />

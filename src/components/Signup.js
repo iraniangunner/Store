@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { updateUserName, updatePassword } from "../State/actions/profileAction";
 
 const SignUp = () => {
-  // const dispatch = useDispatch()
-  // const { updateUserName, updatePassword} = bindActionCreators(actions, dispatch)
 
   const inputElement = useRef(null);
 
@@ -43,8 +39,7 @@ const SignUp = () => {
       ...finalValues,
       ...formValues,
     });
-    // dispatch(updateUserName(finalValues.userName));
-    // dispatch(updatePassword(finalValues.passWord))
+ 
   };
 
   return (
