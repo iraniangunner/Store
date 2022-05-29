@@ -29,20 +29,29 @@ const Header = () => {
     setIsOpen(false);
   }, [pathname]);
 
+
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   }else{
+  //     document.body.style.overflow = "auto";
+  //   }
+  // },[isOpen])
+
   const themeSwitch = () => {
     setTheme(!theme);
   };
 
   return (
     <header className="sticky top-0 z-30">
-      <nav className="bg-gray-50 dark:bg-gray-900 w-full flex justify-between items-center py-1 px-4">
+      <nav className="bg-gray-50 dark:bg-gray-800 w-full flex justify-between items-center py-1 px-4">
         <div className="logo cursor-pointer ">
           <Link to="/" className="text-2xl text-gray-900">
             <img src={logo} alt="NFT Logo" />
           </Link>
         </div>
-        <div className="links sm:hidden lg:flex justify-end ml-auto ">
-          <ul className="hidden lg:flex justify-between items-center transition-all ease-linear duration-200">
+        <div className="hidden md:flex links justify-end ml-auto ">
+          <ul className="hidden md:flex justify-between items-center transition-all ease-linear duration-200">
             <li className="flex justify-center items-center mx-2">
               <a
                 className="relative px-2 py-6 text-gray-900 dark:text-gray-50 after:absolute after:bottom-[10px] after:inset-x-0 after:m-auto after:w-0 after:content-['.'] after:text-transparent after:bg-[#aaa] after:h-[1px] after:transition[width] after:duration-[0.5s] hover:text-[#555] hover:after:w-full"
@@ -53,13 +62,12 @@ const Header = () => {
               </a>
             </li>
             <li className="flex justify-center items-center mx-2">
-              <a
+              <Link
                 className="relative px-2 py-6 text-gray-900 dark:text-gray-50 after:absolute after:bottom-[10px] after:inset-x-0 after:m-auto after:w-0 after:content-['.'] after:text-transparent after:bg-[#aaa] after:h-[1px] after:transition[width] after:duration-[0.5s] hover:text-[#555] hover:after:w-full"
-                href="https://bscscan.com/token/0x80e7dc4e726E052b0dB04ec8b506596458809c11"
-                target="_blank"
+                to="/create"
               >
-                Roadmap
-              </a>
+                Create
+              </Link>
             </li>
             <li className="flex justify-center items-center mx-2">
               <a
@@ -114,7 +122,7 @@ pointer-events-none md:flex items-center justify-center h-[29px] w-[29px] rounde
             </li>
           </ul>
         </div>
-        <div className="menuIcon text-gray-900 dark:text-gray-50 inline-block text-gray-900 rounded-md mr-0 ml-auto lg:hidden">
+        <div className="menuIcon text-gray-900 dark:text-gray-50 inline-block text-gray-900 rounded-md mr-0 ml-auto md:hidden">
           <Hamburger
             toggled={isOpen}
             onToggle={() => setIsOpen(!isOpen)}
@@ -125,8 +133,8 @@ pointer-events-none md:flex items-center justify-center h-[29px] w-[29px] rounde
         </div>
       </nav>
       {isOpen && (
-        <div className="bg-gray-50 dark:bg-gray-900 pb-3 pt-1 items-center w-full shadow-2xl lg:hidden z-10">
-          <ul className="lg:flex vs:hidden space-y-4">
+        <div className="md:hidden bg-gray-50 dark:bg-gray-800 pb-3 pt-1 w-full shadow-2xl z-10">
+          <ul className="md:hidden space-y-4">
             <li className="cursor-pointer hover:bg-gray-500 transition-all ease-linear duration-200 mx-3 p-3">
               <a
                 className="block text-gray-900 dark:text-gray-50"
@@ -137,13 +145,12 @@ pointer-events-none md:flex items-center justify-center h-[29px] w-[29px] rounde
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-500 transition-all ease-linear duration-200 mx-3 p-3">
-              <a
-                className="block text-gray-900 dark:text-gray-50 "
-                href="https://bscscan.com/token/0x80e7dc4e726E052b0dB04ec8b506596458809c11"
-                target="_blank"
+            <Link
+                className="block text-gray-900 dark:text-gray-50"
+                to="/create"
               >
-                Roadmap
-              </a>
+                Create
+              </Link>
             </li>
             <li className="cursor-pointer hover:bg-gray-500 transition-all ease-linear duration-200 mx-3 p-3">
               <a

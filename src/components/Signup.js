@@ -51,7 +51,7 @@ const SignUp = () => {
     <>
       <form
         onSubmit={submitHandler}
-        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
+        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] dark:bg-gray-300 mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
       >
         <div className="w-full mb-[16px]">
           <label
@@ -126,7 +126,7 @@ const SignUp = () => {
         </button>
       </form>
 
-      <div className="flex justify-between flex-wrap w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 mx-auto bg-[#f6f8fa] px-[16px] py-[16px] border border-solid border-[#d0d7de] rounded-[6px] text-[14px]">
+      <div className="flex justify-between flex-wrap w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 mx-auto bg-[#f6f8fa] dark:bg-gray-300 px-[16px] py-[16px] border border-solid border-[#d0d7de] rounded-[6px] text-[14px]">
         <span className="dark:text-black">Already have an account?</span>
         <Link to="/sign-in" className="text-[#0969da]">
           Sign in

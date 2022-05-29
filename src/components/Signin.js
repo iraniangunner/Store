@@ -39,7 +39,7 @@ const SignIn = () => {
     <>
       <form
         onSubmit={submitHandler}
-        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
+        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] dark:bg-gray-300 mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
       >
         <div className="w-full mb-[16px]">
           <label
@@ -64,7 +64,7 @@ const SignIn = () => {
             className="flex justify-between flex-wrap text-[14px] mb-[8px] font-[400] dark:text-black"
           >
             <span>Password</span>
-            <Link to="/password-reset" className="text-[#0969da] text-[12px]">
+            <Link to="/pass-reset" className="text-[#0969da] text-[12px]">
               Forgot password?
             </Link>
           </label>
@@ -85,7 +85,7 @@ const SignIn = () => {
         </button>
       </form>
 
-      <div className="flex justify-between flex-wrap w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 mx-auto bg-[#f6f8fa] px-[16px] py-[16px] border border-solid border-[#d0d7de] rounded-[6px] text-[14px]">
+      <div className="flex justify-between flex-wrap w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 mx-auto bg-[#f6f8fa] dark:bg-gray-300 px-[16px] py-[16px] border border-solid border-[#d0d7de] rounded-[6px] text-[14px]">
         <span className="dark:text-black">New To Here?</span>
         <Link to="/sign-up" className="text-[#0969da]">
           Create an account
