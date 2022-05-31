@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setConfirm, setEmail, setPassword, setUsername, email } from "../state/userSlice";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  // const userEmail = useSelector(email);
 
   const inputElement = useRef(null);
 
@@ -13,12 +17,6 @@ const SignUp = () => {
     passConfirmation: "",
   });
 
-  const [finalValues, setFinalValues] = useState({
-    userName: "",
-    passWord: "",
-    emailAddress: "",
-    passConfirmation: "",
-  });
 
   useEffect(() => {
     if (inputElement.current) {
@@ -35,18 +33,17 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setFinalValues({
-      ...finalValues,
-      ...formValues,
-    });
- 
+    dispatch(setUsername(formValues.userName));
+    dispatch(setEmail(formValues.emailAddress));
+    dispatch(setPassword(formValues.passWord));
+    dispatch(setConfirm(formValues.passConfirmation));
   };
 
   return (
     <>
       <form
         onSubmit={submitHandler}
-        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] dark:bg-gray-300 mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
+        className="w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 bg-[#f6f8fa] dark:bg-gray-200 mx-auto my-8 p-5 rounded-[6px] border border-solid border-[hsla(210,18%,87%,1)]"
       >
         <div className="w-full mb-[16px]">
           <label
@@ -60,7 +57,7 @@ const SignUp = () => {
             id="email"
             onChange={clickHandler}
             ref={inputElement}
-            name="userName"
+            name="emailAddress"
             className="block w-full bg-white px-[12px] py-[5px] text-[#24292f] text-[14px] border border-solid border-[#d0d7de] focus:outline-none focus:border-[#0969da] focus:shadow-inner-[0_0_0_32px_#ffffff] focus:shadow-[0_0_0_3px_rgba(9,105,218,0.3)] rounded-lg"
           />
         </div>
@@ -76,7 +73,7 @@ const SignUp = () => {
             type="text"
             id="name"
             onChange={clickHandler}
-            name="emailAddress"
+            name="userName"
             className="block w-full bg-white px-[12px] py-[5px] text-[#24292f] text-[14px] border border-solid border-[#d0d7de] focus:outline-none focus:border-[#0969da] focus:shadow-inner-[0_0_0_32px_#ffffff] focus:shadow-[0_0_0_3px_rgba(9,105,218,0.3)] rounded-lg"
           />
         </div>
@@ -126,19 +123,6 @@ const SignUp = () => {
         <Link to="/sign-in" className="text-[#0969da]">
           Sign in
         </Link>
-      </div>
-      <div className="text-center h-24">
-        {finalValues.userName &&
-          finalValues.emailAddress &&
-          finalValues.passWord &&
-          finalValues.passConfirmation && (
-            <>
-              <p>username : {finalValues.userName}</p>
-              <p>email : {finalValues.emailAddress}</p>
-              <p>password : {finalValues.passWord}</p>
-              <p>passwordConfirm : {finalValues.passConfirmation}</p>
-            </>
-          )}
       </div>
     </>
   );

@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { useDropzone } from "react-dropzone";
-import { FiUpload } from "react-icons/fi";
+import { BiImageAdd } from "react-icons/bi";
+import { IoMdTrash } from "react-icons/io";
+import { RiErrorWarningLine } from "react-icons/ri";
+import ImageUploading from "react-images-uploading";
 import { useDispatch, useSelector } from "react-redux";
 import { setDesc, setPrice, setTitle, setUrl, title } from "../state/formSlice";
 
 const CreateProduct = () => {
-
   const dispatch = useDispatch();
-  const userTitle = useSelector(title)
-  
+  // const userTitle = useSelector(title);
+
   const [formValues, setFormvalues] = useState({
     productTitle: "",
     productDesc: "",
-    productPrice : "",
+    productPrice: "",
     files: [],
   });
 
@@ -23,38 +24,22 @@ const CreateProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(setUrl(formValues.files.preview))
-    dispatch(setTitle(formValues.productTitle))
-    dispatch(setDesc(formValues.productDesc))
-    dispatch(setPrice(formValues.price))
-    console.log(formValues.productTitle);
+    // dispatch(setUrl(formValues.files[0].preview));
+    // dispatch(setTitle(formValues.productTitle));
+    // dispatch(setDesc(formValues.productDesc));
+    // dispatch(setPrice(formValues.price));
+    console.log(formValues);
   };
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "image/*": [],
-    },
-    onDrop: (acceptedFiles) => {
-      setFormvalues({
-        ...formValues,
-        files: acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        ),
-      });
-    },
-  });
+  const maxNumber = 10;
 
-  useEffect(() => {
-    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () =>
-      formValues.files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, []);
+  const onChange = (imageList, addUpdateIndex) => {
+    setFormvalues({ ...formValues, files: imageList });
+  };
 
   return (
     <form
-      className="w-8/12 md:w-5/12 my-8 p-5 mx-auto"
+      className="w-10/12 sm:w-8/12 md:w-6/12 xl:w-5/12 my-8 p-3 sm:p-5 mx-auto"
       onSubmit={submitHandler}
     >
       <div className="mb-[30px]">
@@ -62,51 +47,72 @@ const CreateProduct = () => {
           htmlFor="file"
           className="block text-[14px] mb-[8px] font-[400] dark:text-white"
         >
-          Product Image
+          Product Images
         </label>
 
-        <section className="h-[16rem] w-full sm:w-[70%] lg:w-[50%] flex rounded-lg cursor-pointer border-2 border-dashed border-gray-400 dark:hover:bg-[#101112] hover:bg-[#CCCCCC] transition-all ease-linear duration-150">
-          <div
-            {...getRootProps({
-              className: "w-full rounded-lg flex items-center justify-center",
-            })}
-          >
-            <input {...getInputProps()} />
-            {!formValues.files.length ? (
-              <div className="flex flex-col items-center justify-center p-2">
-                <FiUpload size={30} />
-                <p className="mt-2 text-center">Drag and Drop or browse file</p>
-              </div>
-            ) : (
-              <aside className="w-full h-full flex flex-row flex-wrap">
-                {formValues.files.map((file) => (
-                  <div
-                    className="inline-flex rounded-sm border border-solid border-[#eaeaea] w-full h-full"
-                    key={file.name}
+        <ImageUploading
+          multiple
+          value={formValues.files}
+          onChange={onChange}
+          maxNumber={maxNumber}
+          dataURLKey="data_url"
+        >
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemoveAll,
+            onImageUpdate,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            // write your building UI
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[16px]">
+              <button
+                type="button"
+                className={`${isDragging && `text-[#be123c]`} ${
+                  formValues.files.length >= maxNumber &&
+                  `pointer-events-none opacity-40`
+                } rounded-lg border-2 border-dashed w-full h-full border-gray-500 aspect-square flex items-center justify-center cursor-pointer hover:border-gray-800 dark:hover:border-gray-200 transition-all ease-linear duration-150`}
+                onClick={onImageUpload}
+                disabled={formValues.files.length >= maxNumber}
+                {...dragProps}
+              >
+                <BiImageAdd size={30} />
+              </button>
+
+              {imageList.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative rounded-[4px] aspect-square"
+                >
+                  <button
+                    className="absolute top-[4px] right-[4px] bg-[rgba(0,0,0,.32)] hover:bg-[rgba(0,0,0,.20)] dark:hover:bg-[rgba(0,0,0,.56)] transition-all rounded-[2px] flex justify-center items-center w-[1.375rem] h-[1.375rem]"
+                    onClick={() => onImageRemove(index)}
                   >
-                    <div className="w-full overflow-hidden">
-                      <img
-                        src={file.preview}
-                        className="block h-full w-full"
-                        // Revoke data url after image is loaded
-                        onLoad={() => {
-                          URL.revokeObjectURL(file.preview);
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </aside>
-            )}
-          </div>
-        </section>
+                    <IoMdTrash />
+                  </button>
+                  <img
+                    src={image["data_url"]}
+                    alt="productImage"
+                    className="w-full h-full rounded-[4px] object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </ImageUploading>
+        <p className="text-[8px] sm:text-[14px] mt-[20px] flex items-center">
+          <RiErrorWarningLine size={20} className="mr-1"/>
+          The number of selected photos should not exceed 10
+        </p>
       </div>
       <div className="mb-[30px]">
         <label
           htmlFor="title"
           className="block text-[14px] mb-[8px] font-[400] dark:text-white"
         >
-          Product Title : {userTitle}
+          Product Title
         </label>
         <input
           type="text"
@@ -152,7 +158,12 @@ const CreateProduct = () => {
         />
       </div>
 
-      <button type="submit" className="bg-gray-700 dark:bg-gray-200 text-white dark:text-[#000] p-2 rounded-sm">Submit</button>
+      <button
+        type="submit"
+        className="bg-gray-700 dark:bg-gray-200 text-white dark:text-[#000] p-2 rounded-sm"
+      >
+        Submit
+      </button>
     </form>
   );
 };
