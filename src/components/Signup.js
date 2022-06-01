@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setConfirm, setEmail, setPassword, setUsername, email } from "../state/userSlice";
+import { setConfirm, setEmail, setPassword, setUsername, email } from "../State/userSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();

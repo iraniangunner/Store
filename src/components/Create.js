@@ -5,7 +5,7 @@ import { IoMdTrash } from "react-icons/io";
 import { RiErrorWarningLine } from "react-icons/ri";
 import ImageUploading from "react-images-uploading";
 import { useDispatch, useSelector } from "react-redux";
-import { setDesc, setPrice, setTitle, setUrl, title } from "../state/formSlice";
+import { setDesc, setPrice, setTitle, setUrl, title } from "../State/formSlice";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
